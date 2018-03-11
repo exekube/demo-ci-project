@@ -2,8 +2,8 @@ version: "2"
 
 services:
   exekube:
-    image: ilyasotkov/exekube:latest
-    # image: exekube-ksonnet:latest
+    # image: ilyasotkov/exekube:latest
+    image: exekube-ksonnet:latest
     working_dir: /project
     environment:
       TF_INPUT: "0"

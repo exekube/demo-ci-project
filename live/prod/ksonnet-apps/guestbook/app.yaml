@@ -1,0 +1,18 @@
+apiVersion: 0.1.0
+environments:
+  default:
+    destination:
+      namespace: ks-dev
+      server: https://35.205.127.134
+    k8sVersion: v1.8.7
+    path: default
+kind: ksonnet.io/app
+name: guestbook
+registries:
+  incubator:
+    gitVersion:
+      commitSha: 422d521c05aa905df949868143b26445f5e4eda5
+      refSpec: master
+    protocol: github
+    uri: github.com/ksonnet/parts/tree/master/incubator
+version: 0.0.1
