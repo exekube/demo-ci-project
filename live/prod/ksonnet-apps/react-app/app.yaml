@@ -1,0 +1,31 @@
+apiVersion: 0.1.0
+environments:
+  default:
+    destination:
+      namespace: default
+      server: https://35.195.77.240
+    k8sVersion: v1.7.0
+    path: default
+kind: ksonnet.io/app
+libraries:
+  nginx-react:
+    gitVersion:
+      commitSha: 02c74409c7b95c0cb3bee7b61e0313e05db8b786
+      refSpec: master
+    name: nginx-react
+    registry: private-registry
+name: react-app
+registries:
+  incubator:
+    gitVersion:
+      commitSha: 422d521c05aa905df949868143b26445f5e4eda5
+      refSpec: master
+    protocol: github
+    uri: github.com/ksonnet/parts/tree/master/incubator
+  private-registry:
+    gitVersion:
+      commitSha: 02c74409c7b95c0cb3bee7b61e0313e05db8b786
+      refSpec: master
+    protocol: github
+    uri: github.com/ilyasotkov/ksonnet-assets/tree/master/private-registry
+version: 0.0.1

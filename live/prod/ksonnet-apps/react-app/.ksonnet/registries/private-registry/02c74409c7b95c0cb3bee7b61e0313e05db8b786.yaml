@@ -1,0 +1,9 @@
+apiVersion: 0.1.0
+gitVersion:
+  commitSha: 02c74409c7b95c0cb3bee7b61e0313e05db8b786
+  refSpec: master
+kind: ksonnet.io/registry
+libraries:
+  nginx-react:
+    path: nginx-react
+    version: master
