@@ -8,7 +8,7 @@ terragrunt = {
   dependencies {
     paths = [
       "../_helm",
-      "../../kube-system/ingress-controller",
+      "../../kube-system/nginx-ingress",
       "../../kube-system/kube-lego",
     ]
   }

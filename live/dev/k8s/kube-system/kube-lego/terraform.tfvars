@@ -8,7 +8,6 @@ terragrunt = {
   dependencies {
     paths = [
       "../_helm",
-      "../ingress-controller",
     ]
   }
 
@@ -24,9 +23,7 @@ release_spec = {
   tiller_namespace = "kube-system"
   namespace        = "kube-system"
 
-  # namespace    = "kube-system"
-  release_name = "kube-lego"
-
+  release_name  = "kube-lego"
   chart_repo    = "stable"
   chart_name    = "kube-lego"
   chart_version = "0.4.0"

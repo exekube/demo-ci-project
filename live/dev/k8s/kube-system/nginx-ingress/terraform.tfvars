@@ -7,7 +7,6 @@ terragrunt = {
 
   dependencies {
     paths = [
-      "../cluster-admin",
       "../_helm",
     ]
   }
@@ -24,12 +23,13 @@ release_spec = {
   tiller_namespace = "kube-system"
   namespace        = "kube-system"
 
-  release_name  = "ingress-controller"
+  release_name  = "nginx-ingress"
   chart_repo    = "stable"
   chart_name    = "nginx-ingress"
   chart_version = "0.11.1"
 }
 
-kubernetes_secrets = [
-  "kube-system/kube-lego/certs.yaml",
-]
+# kubernetes_secrets = [
+#   "kube-system/kube-lego/certs.yaml",
+# ]
+

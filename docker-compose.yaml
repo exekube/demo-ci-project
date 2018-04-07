@@ -2,16 +2,39 @@ version: "3"
 
 services:
   exekube:
-    image: ilyasotkov/exekube:0.2.0-rc.1
+    image: ilyasotkov/exekube:latest
     working_dir: /project
     environment:
       TF_INPUT: "0"
       TF_LOG:
       USER: root
       ENV:
-    env_file:
-      - ./live/.env
-      - ./live/${ENV:?err}/.env
+      ORGANIZATION_ID:
+      BILLING_ID:
+
+      # TF_VAR_project_id is used to create a GCP project for our environment
+      # It's then used by modules to create resources in
+      TF_VAR_project_id: ${ENV:?err}-internal-ops-5cfb85 # MODIFY!!!
+
+      # TF_VAR_serviceaccount_key will be used to put the service account key
+      #   upon the creation of the GCP project
+      # It will then be used by modules to authenticate to GCP
+      TF_VAR_serviceaccount_key: /project/live/${ENV:?err}/secrets/kube-system/owner.json
+
+      # TF_VAR is the default directory for Terraform / Terragrunt
+      # Used when we run `xk up` or `xk down` without an argument
+      TF_VAR_default_dir: /project/live/${ENV:?err}/k8s
+
+      # TF_VAR_secrets_dir is used by multiple modules to source secrets from
+      TF_VAR_secrets_dir: /project/live/${ENV:?err}/secrets
+
+      # Keyring is used by the gcp-kms-secret-mgmt module
+      # Also by secrets-fetch and secrets-push scripts
+      # The GCP KMS keyring name to use
+      TF_VAR_keyring_name: keyring
+
+    # env_file:
+      # - ./live/.env
     ports:
       - 8001:8001
     volumes:
