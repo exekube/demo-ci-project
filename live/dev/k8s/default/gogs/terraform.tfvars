@@ -21,20 +21,14 @@ terragrunt = {
 # ↓ Module configuration (empty means all default)
 
 release_spec = {
-  enabled          = false
+  enabled          = true
   tiller_namespace = "default"
   namespace        = "default"
 
-  release_name  = "docker-registry"
-  chart_repo    = "stable"
-  chart_name    = "docker-registry"
-  chart_version = "1.0.5"
+  release_name  = "gogs"
+  chart_repo    = "incubator"
+  chart_name    = "gogs"
+  chart_version = "0.5.2"
 
-  domain_name = "registry.flexeption.pw"
-}
-
-ingress_basic_auth = {
-  secret_name = "registry-htpasswd"
-  username    = "default/docker-registry/basic-auth-username"
-  password    = "default/docker-registry/basic-auth-password"
+  domain_name = "git.flexeption.pw"
 }

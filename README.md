@@ -30,6 +30,7 @@ Our goal is to deploy a production-like GKE cluster, then deploy these applicati
 	- [k8s/default/_helm](#k8sdefaulthelm)
 	- [k8s/default/concourse](#k8sdefaultconcourse)
 	- [k8s/default/chartmuseum](#k8sdefaultchartmuseum)
+    - [k8s/default/gogs](#k8sdefaultgogs)
 	- [k8s/default/docker-registry](#k8sdefaultdocker-registry)
 
 ### Cloud resources
@@ -104,6 +105,12 @@ Our goal is to deploy a production-like GKE cluster, then deploy these applicati
 > ⚠️ Disabled by default
 
 - Release incubator/chartmuseum Helm chart
+
+#### k8s/default/gogs
+
+> ⚠️ Disabled by default
+
+- Release incubator/gogs Helm chart
 
 #### k8s/default/docker-registry
 
