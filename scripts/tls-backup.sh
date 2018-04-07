@@ -1,7 +1,7 @@
 #!/bin/bash
 
 domain_zone="flexeption.pw"
-source=("ci" "registry" "charts" "staging" "production")
+source=("ci" "git" "registry" "charts" "staging" "production")
 green="\e[1;32m"
 no_color="\e[0m"
 secret_file_name="certs-$(date '+%Y-%m-%d-%H-%M-%S').yaml"
