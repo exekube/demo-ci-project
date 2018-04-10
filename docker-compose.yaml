@@ -46,7 +46,5 @@ services:
 
       # EXEKUBE DEVELOPMENT
       - ../exekube/modules:/exekube-modules
-      - ../exekube/docker-entrypoint.sh:/usr/local/bin/docker-entrypoint.sh
       # ---
-
     command: kubectl proxy --address="0.0.0.0" --accept-hosts ".*"
