@@ -2,7 +2,7 @@
 
 terragrunt = {
   terraform {
-    source = "/exekube-modules//gcp-kms-secret-mgmt"
+    source = "/exekube-modules//gcp-secret-mgmt"
   }
 
   include = {
