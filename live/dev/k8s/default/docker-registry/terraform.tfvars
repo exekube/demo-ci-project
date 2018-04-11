@@ -28,7 +28,7 @@ release_spec = {
   release_name  = "docker-registry"
   chart_repo    = "stable"
   chart_name    = "docker-registry"
-  chart_version = "1.0.5"
+  chart_version = "1.1.1"
 
   domain_name = "registry.flexeption.pw"
 }
