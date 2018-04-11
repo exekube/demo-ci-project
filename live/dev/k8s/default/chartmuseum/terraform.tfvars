@@ -26,14 +26,14 @@ release_spec = {
   namespace        = "default"
   release_name     = "chartmuseum"
 
-  chart_repo    = "incubator"
+  chart_repo    = "stable"
   chart_name    = "chartmuseum"
-  chart_version = "0.4.4"
+  chart_version = "1.2.0"
   domain_name   = "charts.flexeption.pw"
 }
 
 post_hook = {
-  command = "sleep 10"
+  command = "sleep 60"
 }
 
 ingress_basic_auth = {

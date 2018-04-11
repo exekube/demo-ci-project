@@ -1,10 +1,13 @@
 env:
   open:
+    STORAGE: google
+    STORAGE_GOOGLE_BUCKET: dev-internal-ops-5cfb85-alibaba
+    STORAGE_GOOGLE_PREFIX: charts
     DISABLE_API: false
     ALLOW_OVERWRITE: true
 
 persistence:
-  Enabled: true
+  enabled: false
 
 ingress:
   enabled: true
