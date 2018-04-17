@@ -18,7 +18,6 @@ web:
     enabled: true
     annotations:
       kubernetes.io/ingress.class: nginx
-      kubernetes.io/tls-acme: "true"
     hosts:
       - ${domain_name}
     tls:
@@ -36,7 +35,7 @@ credentialManager:
   kubernetes:
     enabled: true
     namespacePrefix: "concourse-"
-    keepNamespaces: true
+    keepNamespaces: false
     teams:
       - main
 
