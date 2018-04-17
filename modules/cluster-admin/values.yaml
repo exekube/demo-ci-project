@@ -7,8 +7,9 @@ networkPolicy:
 
 # Assign users as cluster-admins
 clusterAdmins:
-  create: false
-  users: []
+  create: true
+  users:
+    - projectowner@dev-internal-ops-5cfb85.iam.gserviceaccount.com
 
 # List roles to limit things you can view / modify with the dashboard
 # By default, you only get the "view" role
@@ -17,5 +18,5 @@ dashboardPermissions:
   create: true
   clusterRoles:
     - view
-#    - secret-lister
-#    - cluster-viewer
+    - secret-lister
+    - cluster-viewer

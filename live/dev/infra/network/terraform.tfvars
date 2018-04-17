@@ -2,7 +2,7 @@
 
 terragrunt = {
   terraform {
-    source = "/exekube-modules//gke-network"
+    source = "/project/modules//gke-network"
   }
 
   include = {
@@ -13,11 +13,9 @@ terragrunt = {
 # ↓ Module configuration (empty means all default)
 
 dns_zones = {
-  "flexeption-pw" = "flexeption.pw."
-  "flexeption-us" = "flexeption.us."
+  ci-exekube-us = "ci.exekube.us."
 }
 
 dns_records = {
-  "flexeption-pw" = "*.flexeption.pw."
-  "flexeption-us" = "*.flexeption.us."
+  ci-exekube-us = "*.ci.exekube.us."
 }

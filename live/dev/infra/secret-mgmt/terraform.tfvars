@@ -2,6 +2,8 @@
 
 terragrunt = {
   terraform {
+    # source = "/project/modules//gcp-secret-mgmt"
+    # TODO: import resorces using project-scoped Terraform module
     source = "/exekube-modules//gcp-secret-mgmt"
   }
 

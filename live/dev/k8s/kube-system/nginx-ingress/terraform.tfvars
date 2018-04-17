@@ -1,13 +1,13 @@
 # ↓ Module metadata
-
 terragrunt = {
   terraform {
-    source = "/exekube-modules//helm-release"
+    source = "/project/modules//nginx-ingress"
   }
 
   dependencies {
     paths = [
-      "../_helm",
+      "../cluster-admin",
+      "../helm-initializer",
     ]
   }
 
@@ -18,18 +18,4 @@ terragrunt = {
 
 # ↓ Module configuration (empty means all default)
 
-release_spec = {
-  enabled          = true
-  tiller_namespace = "kube-system"
-  namespace        = "kube-system"
-
-  release_name  = "nginx-ingress"
-  chart_repo    = "stable"
-  chart_name    = "nginx-ingress"
-  chart_version = "0.11.1"
-}
-
-# kubernetes_secrets = [
-#   "kube-system/kube-lego/certs.yaml",
-# ]
-
+load_balancer_ip = "35.189.216.47"

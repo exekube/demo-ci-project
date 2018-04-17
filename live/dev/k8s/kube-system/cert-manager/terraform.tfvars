@@ -2,12 +2,12 @@
 
 terragrunt = {
   terraform {
-    source = "/exekube-modules//helm-initializer"
+    source = "/project/modules//cert-manager"
   }
 
   dependencies {
     paths = [
-      "../../cluster",
+      "../cluster-admin",
     ]
   }
 

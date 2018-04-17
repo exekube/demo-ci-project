@@ -2,118 +2,89 @@
 
 This is a demo project built with the [Exekube framework](https://github.com/exekube/exekube)
 
-If you are new to Exekube, follow the *Getting Started Tutorial* tutorial at https://exekube.github.io/exekube/in-practice/getting-started
+> :warning:
+>
+> This is a work in progress
+>
+> :warning:
+
+---
+
+If you are new to Exekube, follow the *Getting Started Tutorial* at https://exekube.github.io/exekube/in-practice/getting-started
 
 ## What we're building
 
-Our goal is to deploy a production-like GKE cluster, then deploy these applications onto it:
+Our goal is to create a production-like GKE cluster, then deploy these applications onto it:
 
-- Gogs (Private Git service)
 - Concourse server (CI service)
 - Docker Registry v2 (Docker image registry)
 - ChartMuseum (Helm chart repository)
 
-## Environments
+## How to configure the project
 
-- dev
+To get this working, you'll need to:
 
-## Live modules
+1. Set the *GCP project* name base in `docker-compose.yaml`:
+    ```yaml
+    TF_VAR_project_id: ${ENV:?err}-demo-apps-296e23
+    ```
+2. Configure project-scoped modules in the `modules` directory: all settings that will be *the same across all environments of the project*.
+3. Configure module imports for the *dev* environment in the `live/dev` directory. We use [Terragrunt](/) to do module imports for us.
 
-- [Cloud resources](#cloud-resources)
-	- [infra/network](#infranetwork)
-	- [k8s/cluster](#k8scluster)
-- [Kubernetes resources](#kubernetes-resources)
-	- [k8s/kube-system/_helm](#k8skube-systemhelm)
-	- [k8s/kube-system/cluster-admin](#k8skube-systemcluster-admin)
-	- [k8s/kube-system/nginx-ingress](#k8skube-systemnginx-ingress)
-	- [k8s/kube-system/kube-lego](#k8skube-systemkube-lego)
-	- [k8s/default/_helm](#k8sdefaulthelm)
-	- [k8s/default/concourse](#k8sdefaultconcourse)
-	- [k8s/default/chartmuseum](#k8sdefaultchartmuseum)
-    - [k8s/default/gogs](#k8sdefaultgogs)
-	- [k8s/default/docker-registry](#k8sdefaultdocker-registry)
+## Project structure
 
-### Cloud resources
+### Project modules
 
-#### infra/network
+```sh
+modules/
+├── gcp-secret-mgmt   # Cloud KMS cryptokeys + GCS storage buckets for secrets
+├── gke-network       # Networking module for the cluster
+├── gke-cluster       # GKE cluster module
+├── helm-initializer  # Install Tiller in kube-system and default namespaces
+├── cluster-admin     # exekube/cluster-admin Helm release
+├── cert-manager      # stable/cert-manager Helm release
+├── nginx-ingress     # stable/nginx-ingress Helm release
+└── concourse         # stable/concourse Helm release
+```
 
-> ⚠️ You must set `dns_zones` and `dns_records` variables for the demo
->
-[gke-network module](/)
+### Project environments
 
-- New network for GCP project
-- Subnets for nodes, pods, services in GKE cluster
-- Regional static IP addresses for nginx-ingress
-- DNS records for nginx-ingress IP address
-
-#### k8s/cluster
-
-> [gke-cluster module](/)
-
-- A GKE Kubernetes cluster
-- Node pools
-
-### Kubernetes resources
-
-#### k8s/kube-system/_helm
-
-> [helm-initializer module](/)
-
-- Generate CA, Tiller server, Helm client TLS certificates and private keys
-- Install Tiller into kube-system namespace
-
-#### k8s/kube-system/cluster-admin
-
-> [helm-release module](/)
->
-> [exekube/cluster-admin Helm chart](/)
-
-- Create namespaces
-- Create deny-all default NetworkPolicies for the namespaces
-- Assign cluster-admins
-
-#### k8s/kube-system/nginx-ingress
-
-> [helm-release module](/)
->
-> [stable/nginx-ingress Helm chart](/)
-
-> ⚠️ You must use the regional static IP address from infra/network module output to set `conroller.service.loadBalancerIP` variable in values.yaml
-
-- Release nginx-ingress Helm chart
-- Use static regional IP address for the cloud TCP Load Balancer
-
-#### k8s/kube-system/kube-lego
-
-> ⚠️ Staging Let's Encrypt server is used by default
-
-- Release stable/kube-lego Helm chart
-
-#### k8s/default/_helm
-
-- Generate CA, Tiller server, Helm client TLS certificates and private keys
-- Install Tiller into default namespace
-
-#### k8s/default/concourse
-
-> ⚠️ Disabled by default
-
-- Release stable/concourse Helm chart
-
-#### k8s/default/chartmuseum
-
-> ⚠️ Disabled by default
-
-- Release incubator/chartmuseum Helm chart
-
-#### k8s/default/gogs
-
-> ⚠️ Disabled by default
-
-- Release incubator/gogs Helm chart
-
-#### k8s/default/docker-registry
-
-> ⚠️ Disabled by default
-
-- Release stable/docker-registry Helm chart
+```sh
+live/
+├── dev
+│   ├── infra
+│   │   ├── network
+│   │   │   └── terraform.tfvars
+│   │   └── secret-mgmt
+│   │       ├── permissions.tf
+│   │       └── terraform.tfvars
+│   ├── k8s
+│   │   ├── cluster
+│   │   │   └── terraform.tfvars
+│   │   ├── default
+│   │   │   └── bookinfo
+│   │   │       └── terraform.tfvars
+│   │   ├── istio-system
+│   │   │   └── istio
+│   │   │       └── terraform.tfvars
+│   │   └── kube-system
+│   │       ├── cert-manager
+│   │       │   ├── resources
+│   │       │   │   └── certs.yaml
+│   │       │   └── terraform.tfvars
+│   │       ├── cluster-admin
+│   │       │   └── terraform.tfvars
+│   │       └── helm-initializer
+│   │           └── terraform.tfvars
+│   └── secrets
+│       ├── default
+│       │   └── helm-tls
+│       └── kube-system
+│           ├── helm-tls
+│           └── owner.json
+├── stg
+│   ...
+├── prod
+│   ...
+└── terraform.tfvars
+```
