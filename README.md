@@ -17,8 +17,8 @@ If you are new to Exekube, follow the *Getting Started Tutorial* at https://exek
 Our goal is to create a production-like GKE cluster, then deploy these applications onto it:
 
 - Concourse server (CI service)
-- Docker Registry v2 (Docker image registry)
 - ChartMuseum (Helm chart repository)
+- Docker Registry v2 (TBD)
 
 ## How to configure the project
 
@@ -44,6 +44,7 @@ modules/
 ├── cluster-admin     # exekube/cluster-admin Helm release
 ├── cert-manager      # stable/cert-manager Helm release
 ├── nginx-ingress     # stable/nginx-ingress Helm release
+├── chartmuseum       # stable/chartmuseum Helm release
 └── concourse         # stable/concourse Helm release
 ```
 
@@ -62,22 +63,26 @@ live/
 │   │   ├── cluster
 │   │   │   └── terraform.tfvars
 │   │   ├── default
-│   │   │   └── bookinfo
-│   │   │       └── terraform.tfvars
-│   │   ├── istio-system
-│   │   │   └── istio
+│   │   │   ├── chartmuseum
+│   │   │   │   └── terraform.tfvars
+│   │   │   └── concourse
 │   │   │       └── terraform.tfvars
 │   │   └── kube-system
 │   │       ├── cert-manager
 │   │       │   ├── resources
-│   │       │   │   └── certs.yaml
 │   │       │   └── terraform.tfvars
 │   │       ├── cluster-admin
 │   │       │   └── terraform.tfvars
-│   │       └── helm-initializer
+│   │       ├── helm-initializer
+│   │       │   └── terraform.tfvars
+│   │       └── nginx-ingress
 │   │           └── terraform.tfvars
 │   └── secrets
 │       ├── default
+│       │   ├── chartmuseum
+│       │   │   ├── basic-auth-password
+│       │   │   └── basic-auth-username
+│       │   ├── concourse.yaml
 │       │   └── helm-tls
 │       └── kube-system
 │           ├── helm-tls
