@@ -1,0 +1,29 @@
+env:
+  open:
+    STORAGE: google
+    STORAGE_GOOGLE_BUCKET: dev-internal-ops-5cfb85-charts
+    STORAGE_GOOGLE_PREFIX: charts
+    DISABLE_API: false
+    ALLOW_OVERWRITE: true
+
+persistence:
+  Enabled: true
+
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+    ingress.kubernetes.io/auth-type: basic
+    ingress.kubernetes.io/auth-secret: ${ingress_basic_auth}
+    ingress.kubernetes.io/auth-realm: Authentication required
+  hosts:
+    "${domain_name}":
+      - /api/charts
+      - /api/prov
+      - /charts
+      - /index.yaml
+  tls:
+    - secretName: ci-exekube-us-cert
+      hosts:
+        - ${domain_name}
