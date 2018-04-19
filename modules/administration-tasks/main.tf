@@ -4,6 +4,17 @@ terraform {
 
 variable "secrets_dir" {}
 
+provider "helm" {}
+
+resource "helm_repository" "exekube" {
+  name = "exekube"
+  url  = "https://exekube.github.io/charts"
+
+  provisioner "local-exec" {
+    command = "helm repo update"
+  }
+}
+
 module "administration_tasks" {
   source           = "/exekube-modules/helm-release-v2"
   tiller_namespace = "kube-system"

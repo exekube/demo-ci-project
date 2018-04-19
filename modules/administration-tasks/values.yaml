@@ -1,21 +1,17 @@
 # List namespaces to create
+# Use 'secure: true' to add deny-all networkpolicy
 namespaces: []
 
-# Whether create a default deny-all policy and allow access to kube-dns for the namespaces
-networkPolicy:
-  create: false
-
-# Assign users as cluster-admins
+# Assign cluster-admin role to users
 clusterAdmins:
   create: false
   users: []
 
 # List roles to limit things you can view / modify with the dashboard
-# By default, you only get the "view" role
-# TODO We should move dashboard deployment from GKE to Helm chart
 dashboardPermissions:
   create: true
   clusterRoles:
     - view
     - secret-lister
-    - cluster-viewer
+    - cluster-object-viewer
+    # - cluster-admin
