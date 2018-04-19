@@ -1,12 +1,11 @@
 # ↓ Module metadata
 terragrunt = {
   terraform {
-    source = "/project/modules//cluster-admin"
+    source = "/project/modules//administration-tasks"
   }
 
   dependencies {
     paths = [
-      "../../cluster",
       "../helm-initializer",
     ]
   }

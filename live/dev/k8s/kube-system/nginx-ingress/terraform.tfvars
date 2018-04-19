@@ -6,8 +6,7 @@ terragrunt = {
 
   dependencies {
     paths = [
-      "../cluster-admin",
-      "../helm-initializer",
+      "../administration-tasks",
     ]
   }
 

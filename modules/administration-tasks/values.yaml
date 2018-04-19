@@ -7,9 +7,8 @@ networkPolicy:
 
 # Assign users as cluster-admins
 clusterAdmins:
-  create: true
-  users:
-    - projectowner@dev-internal-ops-5cfb85.iam.gserviceaccount.com
+  create: false
+  users: []
 
 # List roles to limit things you can view / modify with the dashboard
 # By default, you only get the "view" role
