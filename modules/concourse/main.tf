@@ -5,8 +5,9 @@ terraform {
 variable "secrets_dir" {}
 variable "domain_name" {}
 
-module "cluster_admin" {
-  source           = "/exekube-modules/helm-release-v2"
+module "concourse" {
+  source = "/exekube-modules/helm-release-v2"
+
   tiller_namespace = "kube-system"
   client_auth      = "${var.secrets_dir}/kube-system/helm-tls"
 
@@ -19,7 +20,7 @@ module "cluster_admin" {
   chart_version = "1.3.0"
 
   # These secrets will be created before installing the chart
-  kubernetes_secrets = [
+  kubernetes_yaml = [
     "${var.secrets_dir}/default/concourse.yaml",
   ]
 }
