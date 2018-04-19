@@ -6,9 +6,6 @@ env:
     DISABLE_API: false
     ALLOW_OVERWRITE: true
 
-persistence:
-  Enabled: true
-
 ingress:
   enabled: true
   annotations:

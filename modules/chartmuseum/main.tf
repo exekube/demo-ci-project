@@ -16,11 +16,32 @@ module "chartmuseum" {
 
   chart_repo    = "stable"
   chart_name    = "chartmuseum"
-  chart_version = " 1.2.0"
+  chart_version = "1.3.0"
 
   ingress_basic_auth = {
     secret_name = "chartrepo-htpasswd"
     username    = "${var.secrets_dir}/default/chartmuseum/basic-auth-username"
     password    = "${var.secrets_dir}/default/chartmuseum/basic-auth-password"
+  }
+}
+
+# ------------------------------------------------------------------------------
+# Add the chartmuseum Helm repo as "private"
+# ------------------------------------------------------------------------------
+
+provider "helm" {}
+
+locals {
+  username = "${chomp(file("${var.secrets_dir}/default/chartmuseum/basic-auth-username"))}"
+  password = "${chomp(file("${var.secrets_dir}/default/chartmuseum/basic-auth-password"))}"
+}
+
+resource "helm_repository" "exekube" {
+  depends_on = ["module.chartmuseum"]
+  name       = "private"
+  url        = "https://${local.username}:${local.password}@${var.domain_name}"
+
+  provisioner "local-exec" {
+    command = "helm repo update"
   }
 }
