@@ -6,7 +6,7 @@ variable "secrets_dir" {}
 variable "domain_name" {}
 
 module "chartmuseum" {
-  source           = "/exekube-modules/helm-release-v2"
+  source           = "/exekube-modules/helm-release"
   tiller_namespace = "kube-system"
   client_auth      = "${var.secrets_dir}/kube-system/helm-tls"
 

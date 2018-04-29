@@ -6,7 +6,7 @@ variable "secrets_dir" {}
 variable "domain_name" {}
 
 module "docker_registry" {
-  source           = "/exekube-modules/helm-release-v2"
+  source           = "/exekube-modules/helm-release"
   tiller_namespace = "default"
   client_auth      = "${var.secrets_dir}/default/helm-tls"
 

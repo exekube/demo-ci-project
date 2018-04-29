@@ -4,9 +4,8 @@ terraform {
 
 variable "secrets_dir" {}
 
-# cert-manager Helm release
 module "cert_manager" {
-  source           = "/exekube-modules/helm-release-v2"
+  source           = "/exekube-modules/helm-release"
   tiller_namespace = "kube-system"
   client_auth      = "${var.secrets_dir}/kube-system/helm-tls"
 
@@ -18,16 +17,19 @@ module "cert_manager" {
   chart_version = "0.2.8"
 }
 
-# cert-manager issuers
 resource "null_resource" "cert_manager_resources" {
   depends_on = ["module.cert_manager"]
 
   provisioner "local-exec" {
     command = "kubectl apply -f ${path.module}/resources/"
+
+    # command = "kubectl -n default apply -f ${var.secrets_dir}/default/ci-exekube-us-cert.yaml"
   }
 
   provisioner "local-exec" {
     when    = "destroy"
     command = "kubectl delete -f ${path.module}/resources/"
+
+    # command = "kubectl -n default delete -f ${var.secrets_dir}/default/ci-exekube-us-cert.yaml"
   }
 }

@@ -13,6 +13,8 @@ spec:
   - dev.concourse.ci.exekube.us
   - dev.registry.ci.exekube.us
   - dev.charts.ci.exekube.us
+  - dev.app.ci.exekube.us
+  - dev.app2.ci.exekube.us
   acme:
     config:
     - http01:
@@ -21,3 +23,5 @@ spec:
       - dev.concourse.ci.exekube.us
       - dev.registry.ci.exekube.us
       - dev.charts.ci.exekube.us
+      - dev.app.ci.exekube.us
+      - dev.app2.ci.exekube.us
