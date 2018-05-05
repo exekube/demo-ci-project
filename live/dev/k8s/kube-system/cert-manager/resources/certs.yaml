@@ -1,27 +1,27 @@
-apiVersion: certmanager.k8s.io/v1alpha1
-kind: Certificate
-metadata:
-  name: ci-exekube-us-cert
-  namespace: default
-spec:
-  secretName: ci-exekube-us-cert
-  issuerRef:
-    kind: ClusterIssuer
-    name: letsencrypt-stg
-  # commonName: example.com
-  dnsNames:
-  - dev.concourse.ci.exekube.us
-  - dev.registry.ci.exekube.us
-  - dev.charts.ci.exekube.us
-  - dev.app.ci.exekube.us
-  - dev.app2.ci.exekube.us
-  acme:
-    config:
-    - http01:
-        ingressClass: nginx
-      domains:
-      - dev.concourse.ci.exekube.us
-      - dev.registry.ci.exekube.us
-      - dev.charts.ci.exekube.us
-      - dev.app.ci.exekube.us
-      - dev.app2.ci.exekube.us
+# apiVersion: certmanager.k8s.io/v1alpha1
+# kind: Certificate
+# metadata:
+#   name: ci-exekube-us-cert
+#   namespace: default
+# spec:
+#   secretName: ci-exekube-us-cert
+#   issuerRef:
+#     kind: ClusterIssuer
+#     name: letsencrypt
+#   # commonName: example.com
+#   dnsNames:
+#   - dev.concourse.ci.exekube.us
+#   - dev.registry.ci.exekube.us
+#   - dev.charts.ci.exekube.us
+#   - dev.app.ci.exekube.us
+#   - dev.app2.ci.exekube.us
+#   acme:
+#     config:
+#     - http01:
+#         ingressClass: nginx
+#       domains:
+#       - dev.concourse.ci.exekube.us
+#       - dev.registry.ci.exekube.us
+#       - dev.charts.ci.exekube.us
+#       - dev.app.ci.exekube.us
+#       - dev.app2.ci.exekube.us

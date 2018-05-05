@@ -8,7 +8,7 @@ spec:
     # The ACME server URL
     server: https://acme-staging.api.letsencrypt.org/directory
     # Email address used for ACME registration
-    email: acme@example.com
+    email: your-email-address-here@example.com
     # Name of a secret used to store the ACME account private key from step 3
     privateKeySecretRef:
       name: letsencrypt-private-key
@@ -25,7 +25,7 @@ spec:
 #     # The ACME server URL
 #     server: https://acme-v01.api.letsencrypt.org/directory
 #     # Email address used for ACME registration
-#     email: acme@example.com
+#     email: your-email-address-here@example.com
 #     # Name of a secret used to store the ACME account private key from step 3
 #     privateKeySecretRef:
 #       name: letsencrypt-private-key

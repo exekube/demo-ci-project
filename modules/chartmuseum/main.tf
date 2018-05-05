@@ -29,19 +29,21 @@ module "chartmuseum" {
 # Add the chartmuseum Helm repo as "private"
 # ------------------------------------------------------------------------------
 
-provider "helm" {}
 
-locals {
-  username = "${chomp(file("${var.secrets_dir}/default/chartmuseum/basic-auth-username"))}"
-  password = "${chomp(file("${var.secrets_dir}/default/chartmuseum/basic-auth-password"))}"
-}
+# provider "helm" {}
+#
+# locals {
+#   username = "${chomp(file("${var.secrets_dir}/default/chartmuseum/basic-auth-username"))}"
+#   password = "${chomp(file("${var.secrets_dir}/default/chartmuseum/basic-auth-password"))}"
+# }
+#
+# resource "helm_repository" "exekube" {
+#   depends_on = ["module.chartmuseum"]
+#   name       = "private"
+#   url        = "https://${local.username}:${local.password}@${var.domain_name}"
+#
+#   provisioner "local-exec" {
+#     command = "helm repo update"
+#   }
+# }
 
-resource "helm_repository" "exekube" {
-  depends_on = ["module.chartmuseum"]
-  name       = "private"
-  url        = "https://${local.username}:${local.password}@${var.domain_name}"
-
-  provisioner "local-exec" {
-    command = "helm repo update"
-  }
-}

@@ -12,10 +12,16 @@ terragrunt = {
 
 # ↓ Module configuration (empty means all default)
 
-dns_zones = {
-  ci-exekube-us = "ci.exekube.us."
-}
+create_static_ip_address = false
 
-dns_records = {
-  ci-exekube-us = "*.ci.exekube.us."
-}
+# dns_zones = {
+#   ci-exekube-us = "ci.exekube.us."
+# }
+
+dns_zones = {}
+
+# dns_records = {
+#   ci-exekube-us = "*.ci.exekube.us."
+# }
+
+dns_records = {}
